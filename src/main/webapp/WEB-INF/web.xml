@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>associations</display-name>
 
   <!-- 注册ServletContext监听器，创建容器对象，并且将ApplicationContext对象放到Application域中 -->
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>com.rui.framework.listener.WebContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
 
   <!-- 指定spring核心配置文件 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath*:/spring-context*.xml</param-value>
   </context-param>
-
 
   <!-- 配置前端控制器 -->
   <servlet>
@@ -22,7 +24,7 @@
     <!-- 指定配置文件位置和名称 如果不设置,默认找/WEB-INF/<servlet-name>-servlet.xml -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-mvc.xml</param-value>
+      <param-value>classpath*:/spring-mvc*.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -39,7 +41,6 @@
       <param-name>encoding</param-name>
       <param-value>utf-8</param-value>
     </init-param>
-
     <init-param>
       <param-name>forceEncoding</param-name>
       <param-value>true</param-value>

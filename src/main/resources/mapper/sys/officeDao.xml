@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.sys.dao.OfficeDao">
+
+    <sql id="officeColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.name,
+		a.sort,
+		a.type,
+		a.master AS "master.id",
+		a.phone,
+		a.del_flag,
+		p.name AS "parent.name",
+		m.name AS "master.name"
+	</sql>
+
+    <sql id="officeJoins">
+		LEFT JOIN office p ON p.id = a.parent_id
+		LEFT JOIN user m ON m.id = a.master
+    </sql>
+
+    <select id="get" resultType="Office">
+        SELECT
+        <include refid="officeColumns"/>
+        FROM office a
+        <include refid="officeJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Office">
+        SELECT
+        <include refid="officeColumns"/>
+        FROM office a
+        <include refid="officeJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        ORDER BY a.type, a.sort
+    </select>
+
+
+    <select id="findAllList" resultType="Office">
+        SELECT
+        <include refid="officeColumns"/>
+        FROM office a
+        <include refid="officeJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        ORDER BY a.sort
+    </select>
+
+    <select id="findByParentIdsLike" resultType="Office">
+        SELECT
+        <include refid="officeColumns"/>
+        FROM office a
+        <include refid="officeJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
+        ORDER BY a.sort
+    </select>
+
+    <insert id="insert">
+		INSERT INTO office(
+			id,
+			parent_id,
+			parent_ids,
+			name,
+			sort,
+			type,
+			master,
+			phone,
+			del_flag
+		) VALUES (
+			#{id},
+			#{parent.id},
+			#{parentIds},
+			#{name},
+			#{sort},
+			#{type},
+			#{master.id},
+			#{phone},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE office SET
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds},
+			name = #{name},
+			sort = #{sort},
+			type = #{type},
+			master = #{master.id},
+			phone = #{phone}
+		WHERE id = #{id}
+	</update>
+
+
+    <update id="delete">
+        UPDATE office SET
+        del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id} OR parent_ids LIKE CONCAT('%,', #{id}, ',%')
+    </update>
+
+</mapper>
