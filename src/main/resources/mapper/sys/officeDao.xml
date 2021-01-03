@@ -11,7 +11,6 @@
 		a.type,
 		a.master AS "master.id",
 		a.phone,
-		a.del_flag,
 		p.name AS "parent.name",
 		m.name AS "master.name"
 	</sql>
@@ -34,7 +33,7 @@
         <include refid="officeColumns"/>
         FROM office a
         <include refid="officeJoins"/>
-        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        WHERE 1 = 1
         ORDER BY a.type, a.sort
     </select>
 
@@ -44,16 +43,6 @@
         <include refid="officeColumns"/>
         FROM office a
         <include refid="officeJoins"/>
-        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-        ORDER BY a.sort
-    </select>
-
-    <select id="findByParentIdsLike" resultType="Office">
-        SELECT
-        <include refid="officeColumns"/>
-        FROM office a
-        <include refid="officeJoins"/>
-        WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
         ORDER BY a.sort
     </select>
 
@@ -66,8 +55,7 @@
 			sort,
 			type,
 			master,
-			phone,
-			del_flag
+			phone
 		) VALUES (
 			#{id},
 			#{parent.id},
@@ -76,8 +64,7 @@
 			#{sort},
 			#{type},
 			#{master.id},
-			#{phone},
-			#{delFlag}
+			#{phone}
 		)
 	</insert>
 
@@ -93,10 +80,8 @@
 		WHERE id = #{id}
 	</update>
 
-
     <update id="delete">
-        UPDATE office SET
-        del_flag = #{DEL_FLAG_DELETE}
+        DELETE FROM office
         WHERE id = #{id} OR parent_ids LIKE CONCAT('%,', #{id}, ',%')
     </update>
 

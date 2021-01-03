@@ -10,8 +10,6 @@
     <packaging>war</packaging>
 
     <name>associations Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <!--<url>http://www.example.com</url>-->
 
     <!-- 用来设置版本号 -->
     <properties>
@@ -24,6 +22,7 @@
         <log4j.version>1.2.17</log4j.version>
         <druid.version>1.0.9</druid.version>
         <validator.version>5.2.4.Final</validator.version>
+        <shiro.version>1.2.6</shiro.version>
     </properties>
 
 
@@ -109,6 +108,39 @@
             <version>${spring.version}</version>
         </dependency>
         <!-- spring框架包 -->
+        <!-- SECURITY begin -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+            <version>${shiro.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!-- SECURITY end -->
         <!-- mybatis框架包 -->
         <dependency>
             <groupId>org.mybatis</groupId>

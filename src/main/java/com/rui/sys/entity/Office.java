@@ -5,7 +5,7 @@ import com.rui.framework.entity.BaseEntity;
 import java.util.List;
 
 /**
- * 班级表
+ * 部门班级表
  */
 public class Office extends BaseEntity<Office> {
     /**
@@ -36,7 +36,9 @@ public class Office extends BaseEntity<Office> {
      * 电话
      */
     private String phone;
-
+    /**
+     * 子部门
+     */
     private List<Office> childs;
 
     public Office() {

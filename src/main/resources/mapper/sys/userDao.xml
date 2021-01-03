@@ -3,7 +3,89 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rui.sys.dao.UserDao">
-    <select id="findList" resultType="user">
-        select * from user
+
+    <sql id="userColumns">
+		a.id,
+		a.office_id AS "office.id",
+		a.num,
+		a.name,
+		a.password,
+		a.email,
+		a.phone,
+		a.user_type,
+		a.photo,
+		o.name AS "office.name"
+	</sql>
+
+    <sql id="userJoins">
+		LEFT JOIN office o ON o.id = a.office_id
+    </sql>
+
+    <select id="get" resultType="User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM user a
+        <include refid="userJoins"/>
+        WHERE a.id = #{id}
     </select>
+
+    <select id="findList" resultType="User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM user a
+        <include refid="userJoins"/>
+        WHERE 1 = 1
+        ORDER BY a.num
+    </select>
+
+    <select id="findAllList" resultType="User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM user a
+        <include refid="userJoins"/>
+        ORDER BY a.num
+    </select>
+
+    <insert id="insert">
+		INSERT INTO user(
+			id,
+			office_id,
+			num,
+			name,
+			password,
+			email,
+			phone,
+			user_type,
+			photo
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{num},
+			#{name},
+			#{password},
+			#{email},
+			#{phone},
+			#{userType},
+			#{photo}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE user SET
+			office_id = #{office.id},
+			num = #{num},
+			name = #{name},
+			password = #{password},
+			email = #{email},
+			phone = #{phone},
+			user_type = #{userType},
+			photo = #{photo}
+		WHERE id = #{id}
+	</update>
+
+
+    <update id="delete">
+        DELETE FROM user
+        WHERE id = #{id}
+    </update>
 </mapper>
