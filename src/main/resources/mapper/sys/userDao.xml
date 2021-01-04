@@ -14,7 +14,8 @@
 		a.phone,
 		a.user_type,
 		a.photo,
-		o.name AS "office.name"
+		o.name AS "office.name",
+		o.name AS "officeName"
 	</sql>
 
     <sql id="userJoins">
@@ -35,6 +36,12 @@
         FROM user a
         <include refid="userJoins"/>
         WHERE 1 = 1
+		<if test="num != null and num != ''">
+			AND a.num = #{num}
+		</if>
+		<if test="name != null and name != ''">
+			AND a.name like CONCAT('%', #{name}, '%')
+		</if>
         ORDER BY a.num
     </select>
 
@@ -80,6 +87,12 @@
 			phone = #{phone},
 			user_type = #{userType},
 			photo = #{photo}
+		WHERE id = #{id}
+	</update>
+
+    <update id="resetPassword">
+		UPDATE user SET
+			password = #{password}
 		WHERE id = #{id}
 	</update>
 

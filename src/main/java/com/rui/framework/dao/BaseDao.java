@@ -42,13 +42,12 @@ public interface BaseDao<T> {
     int update(T entity);
 
     /**
-     * 删除数据（一般为逻辑删除，更新del_flag字段为1）
+     * 删除数据
      */
-    @Deprecated
     int delete(String id);
 
     /**
-     * 删除数据（一般为逻辑删除，更新del_flag字段为1）
+     * 删除数据
      */
     int delete(T entity);
 

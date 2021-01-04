@@ -41,10 +41,6 @@ public class Menu extends BaseEntity<Menu> {
      */
     private List<Menu> childs;
     /**
-     * 链接
-     */
-    private String path;
-    /**
      * 组件
      */
     private String component;
@@ -119,14 +115,6 @@ public class Menu extends BaseEntity<Menu> {
 
     public void setChilds(List<Menu> childs) {
         this.childs = childs;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public String getComponent() {

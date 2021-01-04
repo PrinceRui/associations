@@ -3,6 +3,7 @@ package com.rui.sys.controller;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
 import com.rui.framework.utils.StringUtils;
+import com.rui.framework.utils.Utils;
 import com.rui.sys.entity.Menu;
 import com.rui.sys.entity.User;
 import com.rui.sys.service.UserService;
@@ -30,22 +31,22 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public List<User> findList(User user){
+    public List<User> findList(@RequestBody User user){
         return service.findList(user);
     }
 
-    @RequestMapping("/allList")
-    public List<User> findAllList(){
-        return service.findAllList();
-    }
-
     @RequestMapping("/save")
-    public void save(User user){
+    public void save(@RequestBody User user){
         service.save(user);
     }
 
     @RequestMapping(value = "delete")
-    public void delete(User user) {
-        service.delete(user);
+    public void delete(@RequestParam String id) {
+        service.delete(id);
+    }
+
+    @RequestMapping("resetPassword")
+    public void resetPassword(@RequestParam String id){
+        service.resetPassword(id);
     }
 }

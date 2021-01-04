@@ -74,11 +74,11 @@ public class BaseService<Dao extends BaseDao<T>, T extends BaseEntity<T>> {
     }
 
     /**
-     * 删除数据（逻辑删除，更新del_flag字段为1,在表包含字段del_flag时，可以调用此方法，将数据隐藏）
+     * 删除数据
      */
     @Transactional(readOnly = false)
-    public void deleteByLogic(T entity) {
-        dao.delete(entity);
+    public void delete(String id) {
+        dao.delete(id);
     }
 
 }
