@@ -24,8 +24,8 @@ public class MenuService extends BaseService<MenuDao, Menu> {
         super.save(entity);
     }
 
-    public List<Menu> findTreeList(){
-        List<Menu> list = findAllList();
+    public List<Menu> findTreeList(Menu menu){
+        List<Menu> list = findList(menu);
         List<Menu> trees = new ArrayList<>();
         for (Menu item : list) {
             /* 获取到根节点 */
