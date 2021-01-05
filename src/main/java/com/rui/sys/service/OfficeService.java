@@ -25,8 +25,8 @@ public class OfficeService extends BaseService<OfficeDao, Office> {
         super.save(entity);
     }
 
-    public List<Office> findTreeList(){
-        List<Office> list = findAllList();
+    public List<Office> findTreeList(Office office){
+        List<Office> list = findList(office);
         List<Office> trees = new ArrayList<>();
         for (Office item : list) {
             /* 获取到根节点 */

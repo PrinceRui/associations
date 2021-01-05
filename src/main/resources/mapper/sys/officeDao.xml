@@ -43,7 +43,7 @@
         <include refid="officeColumns"/>
         FROM office a
         <include refid="officeJoins"/>
-        ORDER BY a.sort
+		ORDER BY a.type, a.sort
     </select>
 
     <insert id="insert">

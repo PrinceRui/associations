@@ -1,5 +1,7 @@
 package com.rui.sys.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
 import com.rui.framework.utils.StringUtils;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,5 +51,23 @@ public class UserController extends BaseController {
     @RequestMapping("resetPassword")
     public void resetPassword(@RequestParam String id){
         service.resetPassword(id);
+    }
+
+    /**
+     * 仅用于选择，只返回id，num，name
+     * @return
+     */
+    @RequestMapping("getAllUser")
+    public List<JSONObject> getAllUser(){
+        List<User> list = service.findAllList();
+        List<JSONObject> result = new ArrayList<>();
+        for (User user : list) {
+            JSONObject json = new JSONObject();
+            json.put("id", user.getId());
+            json.put("num", user.getNum());
+            json.put("name", user.getName());
+            result.add(json);
+        }
+        return result;
     }
 }

@@ -35,10 +35,6 @@ public class User extends BaseEntity<User> {
      * 用户类型（1:老师，2:学生）
      */
     private String userType;
-    /**
-     * 部门名称，前端显示
-     */
-    private String officeName;
 
 
     public User() {
@@ -113,11 +109,4 @@ public class User extends BaseEntity<User> {
         this.userType = user_type;
     }
 
-    public String getOfficeName() {
-        return officeName;
-    }
-
-    public void setOfficeName(String officeName) {
-        this.officeName = officeName;
-    }
 }

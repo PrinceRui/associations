@@ -14,8 +14,7 @@
 		a.phone,
 		a.user_type,
 		a.photo,
-		o.name AS "office.name",
-		o.name AS "officeName"
+		o.name AS "office.name"
 	</sql>
 
     <sql id="userJoins">
