@@ -43,12 +43,12 @@ public class UserController extends BaseController {
         service.save(user);
     }
 
-    @RequestMapping(value = "delete")
+    @RequestMapping("/delete")
     public void delete(@RequestParam String id) {
         service.delete(id);
     }
 
-    @RequestMapping("resetPassword")
+    @RequestMapping("/resetPassword")
     public void resetPassword(@RequestParam String id){
         service.resetPassword(id);
     }
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
      * 仅用于选择，只返回id，num，name
      * @return
      */
-    @RequestMapping("getAllUser")
+    @RequestMapping("/getAllUser")
     public List<JSONObject> getAllUser(){
         List<User> list = service.findAllList();
         List<JSONObject> result = new ArrayList<>();

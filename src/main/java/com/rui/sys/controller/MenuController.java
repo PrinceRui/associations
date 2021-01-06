@@ -30,12 +30,17 @@ public class MenuController extends BaseController {
         return service.findTreeList(menu);
     }
 
+    @RequestMapping("/allTreeList")
+    public List<Menu> findAllTreeList(){
+        return service.findAllTreeList();
+    }
+
     @RequestMapping("/save")
     public void save(@RequestBody Menu menu){
         service.save(menu);
     }
 
-    @RequestMapping(value = "delete")
+    @RequestMapping("/delete")
     public void delete(@RequestParam String id) {
         service.delete(id);
     }

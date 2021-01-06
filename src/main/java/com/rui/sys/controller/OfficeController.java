@@ -37,7 +37,7 @@ public class OfficeController extends BaseController {
         service.save(office);
     }
 
-    @RequestMapping(value = "delete")
+    @RequestMapping("/delete")
     public void delete(@RequestParam String id) {
         service.delete(id);
     }

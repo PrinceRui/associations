@@ -8,6 +8,7 @@ import com.rui.sys.entity.Role;
 import com.rui.sys.service.RoleService;
 import com.rui.sys.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,23 +32,29 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public List<Role> findList(Role role){
+    public List<Role> findList(@RequestBody Role role){
         return service.findList(role);
     }
 
-    @RequestMapping("/allList")
-    public List<Role> findAllList(){
-        return service.findAllList();
-    }
-
     @RequestMapping("/save")
-    public void save(Role role){
+    public void save(@RequestBody Role role){
         service.save(role);
     }
 
-    @RequestMapping(value = "delete")
-    public void delete(Role role) {
-        service.delete(role);
+    @RequestMapping("/delete")
+    public void delete(@RequestParam String id) {
+        service.delete(id);
+    }
+
+
+    @RequestMapping("/auth")
+    public void auth(@RequestParam String roleId, @RequestParam String[] menuIds) {
+        service.auth(roleId, menuIds);
+    }
+
+    @RequestMapping("/assignRole")
+    public void assignRole(@RequestParam String roleId, @RequestParam String[] userIds) {
+        service.assignRole(roleId, userIds);
     }
 
 }

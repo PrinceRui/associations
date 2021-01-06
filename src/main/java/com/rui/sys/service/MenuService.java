@@ -25,7 +25,14 @@ public class MenuService extends BaseService<MenuDao, Menu> {
     }
 
     public List<Menu> findTreeList(Menu menu){
-        List<Menu> list = findList(menu);
+        return listToTree(findList(menu));
+    }
+
+    public List<Menu> findAllTreeList(){
+        return listToTree(findAllList());
+    }
+
+    private List<Menu> listToTree(List<Menu> list){
         List<Menu> trees = new ArrayList<>();
         for (Menu item : list) {
             /* 获取到根节点 */

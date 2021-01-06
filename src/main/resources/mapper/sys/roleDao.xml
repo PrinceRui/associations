@@ -4,20 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rui.sys.dao.RoleDao">
 
+    <resultMap id="roleResult" type="Role">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <collection property="menuList" ofType="Menu">
+            <id property="id" column="menuList.id" />
+        </collection>
+        <collection property="userList" ofType="User">
+            <id property="id" column="userList.id" />
+        </collection>
+    </resultMap>
+
     <sql id="roleColumns">
 		a.id,
 		a.name
 	</sql>
 
-    <sql id="roleJoins">
-
-    </sql>
-
-    <select id="get" resultType="Role">
+    <select id="get" resultMap="roleResult">
         SELECT
-        <include refid="roleColumns"/>
+            rm.menu_id AS "menuList.id",
+            ru.user_id AS "userList.id",
+            <include refid="roleColumns"/>
         FROM role a
-        <include refid="roleJoins"/>
+        LEFT JOIN role_menu rm ON rm.role_id = a.id
+        LEFT JOIN role_user ru ON ru.role_id = a.id
         WHERE a.id = #{id}
     </select>
 
@@ -25,15 +35,15 @@
         SELECT
         <include refid="roleColumns"/>
         FROM role a
-        <include refid="roleJoins"/>
-        WHERE 1 = 1
+        <if test="name != null and name != ''">
+            WHERE a.name like CONCAT('%', #{name}, '%')
+        </if>
     </select>
 
     <select id="findAllList" resultType="Role">
         SELECT
         <include refid="roleColumns"/>
         FROM role a
-        <include refid="roleJoins"/>
     </select>
 
     <insert id="insert">
@@ -52,6 +62,43 @@
 		WHERE id = #{id}
 	</update>
 
+    <insert id="auth">
+        DELETE FROM role_menu
+        WHERE role_id = #{roleId};
+        <foreach collection="menuIds" index="index" item="menuId" separator=";">
+            INSERT INTO role_menu(
+                role_id,
+                menu_id
+            ) VALUES (
+                #{roleId},
+                #{menuId}
+            )
+        </foreach>
+	</insert>
+
+    <insert id="assignRole">
+        DELETE FROM role_user
+        WHERE role_id = #{roleId};
+        <foreach collection="userIds" index="index" item="userId" separator=";">
+            INSERT INTO role_user(
+                role_id,
+                user_id
+            ) VALUES (
+                #{roleId},
+                #{userId}
+            )
+        </foreach>
+	</insert>
+
+    <insert id="addUser">
+        INSERT INTO role_user(
+            role_id,
+            user_id
+        ) VALUES (
+            '1',
+            #{userId}
+        )
+	</insert>
 
     <update id="delete">
         DELETE FROM role

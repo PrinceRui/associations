@@ -13,15 +13,10 @@
 		a.sort
 	</sql>
 
-    <sql id="dictJoins">
-
-    </sql>
-
     <select id="get" resultType="Dict">
         SELECT
         <include refid="dictColumns"/>
         FROM dict a
-        <include refid="dictJoins"/>
         WHERE a.id = #{id}
     </select>
 
@@ -29,7 +24,6 @@
         SELECT
         <include refid="dictColumns"/>
         FROM dict a
-        <include refid="dictJoins"/>
 		WHERE 1 = 1
 		<if test="type != null and type != ''">
 			AND a.type = #{type}
@@ -44,7 +38,6 @@
         SELECT
         <include refid="dictColumns"/>
         FROM dict a
-        <include refid="dictJoins"/>
         WHERE a.type = #{type}
 		ORDER BY a.sort
     </select>
@@ -53,7 +46,6 @@
         SELECT
         <include refid="dictColumns"/>
         FROM dict a
-        <include refid="dictJoins"/>
     </select>
 
     <insert id="insert">
