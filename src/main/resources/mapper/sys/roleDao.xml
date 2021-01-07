@@ -40,6 +40,14 @@
         </if>
     </select>
 
+    <select id="getByUserId" resultType="Role">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM role a
+        LEFT JOIN role_user ru ON ru.role_id = a.id
+        WHERE ru.user_id = #{userId}
+    </select>
+
     <select id="findAllList" resultType="Role">
         SELECT
         <include refid="roleColumns"/>

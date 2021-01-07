@@ -11,7 +11,7 @@ public class BaseEntity<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    protected String id;
 
     /**
      * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。

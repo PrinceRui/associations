@@ -38,7 +38,9 @@ public class ResponseResultHandler implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         logger.info("进入返回体重写格式");
-        //if(o instanceof  errorresult)
+        if(o instanceof Result){
+            return o;
+        }
         return Result.success(o);
     }
 }

@@ -1,6 +1,11 @@
 package com.rui.sys.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import com.rui.framework.entity.BaseEntity;
+import com.rui.framework.utils.Collections3;
+
+import java.util.List;
 
 public class User extends BaseEntity<User> {
     /**
@@ -107,6 +112,15 @@ public class User extends BaseEntity<User> {
 
     public void setUserType(String user_type) {
         this.userType = user_type;
+    }
+
+
+    public boolean isAdmin(){
+        return isAdmin(this.id);
+    }
+
+    public static boolean isAdmin(String id){
+        return id != null && "1".equals(id);
     }
 
 }

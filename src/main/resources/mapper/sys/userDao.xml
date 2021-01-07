@@ -29,6 +29,14 @@
         WHERE a.id = #{id}
     </select>
 
+    <select id="getUserByNum" resultType="User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM user a
+        <include refid="userJoins"/>
+        WHERE a.num = #{num}
+    </select>
+
     <select id="findList" resultType="User">
         SELECT
         <include refid="userColumns"/>
