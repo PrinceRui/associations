@@ -1,7 +1,9 @@
 package com.rui.framework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rui.framework.utils.StringUtils;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**
@@ -35,6 +37,22 @@ public class BaseEntity<T> implements Serializable {
      */
     public void setIsNewRecord(boolean isNewRecord) {
         this.isNewRecord = isNewRecord;
+    }
+
+    /**
+     * 当前实体分页对象
+     */
+    protected Page<T> page;
+
+    public Page<T> getPage() {
+        if (page == null){
+            page = new Page<T>();
+        }
+        return page;
+    }
+
+    public void setPage(Page<T> page) {
+        this.page = page;
     }
 
 

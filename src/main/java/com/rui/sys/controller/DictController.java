@@ -2,6 +2,7 @@ package com.rui.sys.controller;
 
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
+import com.rui.framework.entity.Page;
 import com.rui.framework.utils.StringUtils;
 import com.rui.sys.entity.Dict;
 import com.rui.sys.service.DictService;
@@ -21,8 +22,8 @@ public class DictController extends BaseController {
     private DictService service;
 
     @RequestMapping("/list")
-    public List<Dict> findList(@RequestBody Dict dict){
-        return service.findList(dict);
+    public Page<Dict> findList(@RequestBody Dict dict){
+        return service.findPageList(dict);
     }
 
     @RequestMapping(value = "save")

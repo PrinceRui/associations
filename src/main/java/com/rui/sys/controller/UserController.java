@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
+import com.rui.framework.entity.Page;
 import com.rui.framework.utils.StringUtils;
 import com.rui.framework.utils.Utils;
 import com.rui.sys.entity.Menu;
@@ -34,8 +35,8 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public List<User> findList(@RequestBody User user){
-        return service.findList(user);
+    public Page<User> findList(@RequestBody User user){
+        return service.findPageList(user);
     }
 
     @RequestMapping("/save")

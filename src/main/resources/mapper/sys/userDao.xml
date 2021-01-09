@@ -50,6 +50,11 @@
 			AND a.name like CONCAT('%', #{name}, '%')
 		</if>
         ORDER BY a.num
+        LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+    </select>
+
+	<select id="count"  resultType="java.lang.Integer">
+        SELECT count(*) FROM user
     </select>
 
     <select id="findAllList" resultType="User">

@@ -21,6 +21,11 @@ public interface BaseDao<T> {
     T get(T entity);
 
     /**
+     * 获取总数
+     */
+    int count();
+
+    /**
      * 查询数据列表
      */
     List<T> findList(T entity);

@@ -32,6 +32,11 @@
 			AND a.description like CONCAT('%', #{description}, '%')
 		</if>
 		ORDER BY a.type, a.sort
+		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+	</select>
+
+	<select id="count"  resultType="java.lang.Integer">
+        SELECT count(*) FROM dict
     </select>
 
     <select id="getDictList" resultType="Dict">

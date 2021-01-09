@@ -2,10 +2,12 @@ package com.rui.framework.service;
 
 import com.rui.framework.dao.BaseDao;
 import com.rui.framework.entity.BaseEntity;
+import com.rui.framework.entity.Page;
 import com.rui.framework.utils.IdGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +41,16 @@ public class BaseService<Dao extends BaseDao<T>, T extends BaseEntity<T>> {
      */
     public List<T> findList(T entity) {
         return dao.findList(entity);
+    }
+
+    /**
+     * 分页查询列表数据
+     */
+    public Page<T> findPageList(T entity) {
+        Page<T> page = new Page<>(entity.getPage());
+        page.setList(dao.findList(entity));
+        page.setCount(dao.count());
+        return page;
     }
 
     /**

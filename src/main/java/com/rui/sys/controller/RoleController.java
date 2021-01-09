@@ -2,6 +2,7 @@ package com.rui.sys.controller;
 
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
+import com.rui.framework.entity.Page;
 import com.rui.framework.utils.StringUtils;
 import com.rui.sys.entity.Role;
 import com.rui.sys.entity.Role;
@@ -32,8 +33,8 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public List<Role> findList(@RequestBody Role role){
-        return service.findList(role);
+    public Page<Role> findList(@RequestBody Role role){
+        return service.findPageList(role);
     }
 
     @RequestMapping("/save")
