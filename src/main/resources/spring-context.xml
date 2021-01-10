@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd"
-	default-lazy-init="true">
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	   default-lazy-init="true">
 
 	<description>Spring Configuration</description>
 	
@@ -96,7 +97,28 @@
 		<!-- 配置监控统计拦截的filters -->
 	    <property name="filters" value="stat" /> 
 	</bean>
-	
+
+	<!--Aop注解扫描 配置一这样扫描所有的包 -->
+	<aop:aspectj-autoproxy />
+	<aop:config proxy-target-class="true"></aop:config>
+
+<!--
+	<bean id="logAdvice" class="com.rui.framework.aspect.LogAdvice"></bean>
+
+	&lt;!&ndash;配置日志切面&ndash;&gt;
+	<aop:config>
+		<aop:pointcut id="pt" expression="execution(* com.rui.*.controller.*.*(..))"/>
+		&lt;!&ndash;日志切面&ndash;&gt;
+		<aop:aspect id="logAspect" ref="logAdvice">
+			&lt;!&ndash;前置通知&ndash;&gt;
+			<aop:before method="doBefore" pointcut-ref="pt"></aop:before>
+			&lt;!&ndash;后置通知&ndash;&gt;
+			<aop:after-returning method="doAfter" pointcut-ref="pt"></aop:after-returning>
+		</aop:aspect>
+	</aop:config>
+-->
+
+
 	<!-- 数据源配置, 不使用连接池
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />

@@ -30,17 +30,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!--配置日志切面-->
-    <!--<aop:config>
-        <aop:pointcut id="pt" expression="execution(* com.rui.*.controller.*.*(..))"/>
-        &lt;!&ndash;日志切面&ndash;&gt;
-        <aop:aspect id="" ref="sysAccessLogAspect">
-         &lt;!&ndash;前置通知&ndash;&gt;
-         <aop:before method="doBefore" pointcut-ref="pt"></aop:before>
-         &lt;!&ndash;后置通知&ndash;&gt;
-         <aop:after-returning method="doAfter" pointcut-ref="pt"></aop:after-returning>
-        </aop:aspect>
-    </aop:config>-->
 
     <!--springMVC框架流程
     1、用户发起请求到前端控制器（DispatcherServlet），前端控制器没有能力处理业务逻辑；
