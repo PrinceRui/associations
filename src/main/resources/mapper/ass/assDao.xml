@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.ass.dao.AssDao">
+
+    <sql id="assColumns">
+		a.id,
+		a.name,
+		a.master AS "master.id",
+		a.photo,
+		u.name As "master.name"
+	</sql>
+
+	<sql id="assJoins">
+		LEFT JOIN user u ON u.id = a.master
+    </sql>
+
+    <select id="get" resultType="Ass">
+        SELECT
+        <include refid="assColumns"/>
+        FROM ass a
+		<include refid="assJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Ass">
+        SELECT
+        <include refid="assColumns"/>
+        FROM ass a
+		<include refid="assJoins"/>
+		<if test="name != null and name != ''">
+			WHERE a.name like CONCAT('%', #{name}, '%')
+		</if>
+		ORDER BY a.name
+		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+	</select>
+
+	<select id="count"  resultType="java.lang.Integer">
+        SELECT count(*) FROM ass
+    </select>
+
+    <select id="findAllList" resultType="Ass">
+        SELECT
+        <include refid="assColumns"/>
+        FROM ass a
+		<include refid="assJoins"/>
+    </select>
+
+    <insert id="insert">
+		INSERT INTO ass(
+			id,
+            name,
+		    master,
+		    photo
+		) VALUES (
+			#{id},
+			#{name},
+			#{master.id},
+			#{photo}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE ass SET
+			name = #{name},
+			master = #{master.id},
+			photo = #{photo}
+		WHERE id = #{id}
+	</update>
+
+
+    <update id="delete">
+        DELETE FROM ass
+        WHERE id = #{id}
+    </update>
+</mapper>
