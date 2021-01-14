@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.ass.dao.ActivityDao">
+
+    <sql id="activityColumns">
+		a.id,
+		a.name,
+		a.ass_id AS "ass.id",
+		a.content,
+		a.start_time,
+		a.end_time,
+		a.status,
+		ass.name As "ass.name"
+	</sql>
+
+	<sql id="activityJoins">
+		LEFT JOIN ass ass ON ass.id = a.ass_id
+    </sql>
+
+    <select id="get" resultType="Activity">
+        SELECT
+        <include refid="activityColumns"/>
+        FROM activity a
+		<include refid="activityJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Activity">
+        SELECT
+        <include refid="activityColumns"/>
+        FROM activity a
+		<include refid="activityJoins"/>
+		<if test="name != null and name != ''">
+			WHERE a.name like CONCAT('%', #{name}, '%')
+		</if>
+		ORDER BY a.name
+		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+	</select>
+
+	<select id="count"  resultType="java.lang.Integer">
+        SELECT count(*) FROM activity
+    </select>
+
+    <select id="findAllList" resultType="Activity">
+        SELECT
+        <include refid="activityColumns"/>
+        FROM activity a
+		<include refid="activityJoins"/>
+    </select>
+
+    <insert id="insert">
+		INSERT INTO activity(
+			id,
+            name,
+		    ass_id,
+		    content,
+		    start_time,
+		    status,
+		    end_time
+		) VALUES (
+			#{id},
+			#{name},
+			#{ass.id},
+			#{content},
+			#{startTime},
+			#{status},
+			#{endTime}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE activity SET
+			name = #{name},
+			ass_id = #{ass.id},
+			content = #{content},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+
+
+    <update id="delete">
+        DELETE FROM activity
+        WHERE id = #{id}
+    </update>
+</mapper>
