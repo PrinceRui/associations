@@ -16,6 +16,7 @@ public enum ResultCode {
     USER_NOT_EXIST(2004, "用户不存在"),
     USER_HAS_EXISTED(2005, "用户已存在"),
     USER_NOT_LOGIN(2006, "用户未登录"),
+    USER_PWD_ERROR(2010, "旧密码错误"),
 
     FOUR_ZERO_FOUR(404, "页面未找到"),
 

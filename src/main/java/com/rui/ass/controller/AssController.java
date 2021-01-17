@@ -5,6 +5,7 @@ import com.rui.framework.controller.BaseController;
 import com.rui.framework.entity.Page;
 import com.rui.ass.entity.Ass;
 import com.rui.ass.service.AssService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

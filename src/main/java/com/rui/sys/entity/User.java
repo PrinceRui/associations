@@ -66,6 +66,7 @@ public class User extends BaseEntity<User> {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

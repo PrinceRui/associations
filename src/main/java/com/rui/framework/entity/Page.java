@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * 分页类
  */
-public class Page<T> {
+public class Page<T> implements Serializable {
 	
 	private int pageNo = 1; // 当前页码
 	private int pageSize ; // 页面大小，设置为“-1”表示不进行分页（分页无效）

@@ -35,6 +35,18 @@ public class UserService extends BaseService<UserDao, User> {
 
     }
 
+    public void updateInfo(User user){
+        dao.updateInfo(user);
+    }
+
+    public void updateImg(User user){
+        dao.updateImg(user);
+    }
+
+    public void updatePwd(User user){
+        dao.updatePwd(user);
+    }
+
     public void resetPassword (String id){
         dao.resetPassword(id, Utils.entryptPassword("123456"));
     }

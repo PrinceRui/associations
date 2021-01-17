@@ -102,6 +102,25 @@
 		WHERE id = #{id}
 	</update>
 
+    <update id="updateInfo">
+		UPDATE user SET
+			email = #{email},
+			phone = #{phone}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateImg">
+		UPDATE user SET
+			photo = #{photo}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updatePwd">
+		UPDATE user SET
+			password = #{password}
+		WHERE id = #{id}
+	</update>
+
     <update id="resetPassword">
 		UPDATE user SET
 			password = #{password}

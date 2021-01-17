@@ -30,6 +30,8 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:resources location="/upload/" mapping="/upload/**" />
+
 
     <!--springMVC框架流程
     1、用户发起请求到前端控制器（DispatcherServlet），前端控制器没有能力处理业务逻辑；
