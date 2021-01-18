@@ -5,6 +5,7 @@ import com.rui.framework.controller.BaseController;
 import com.rui.framework.entity.Page;
 import com.rui.ass.entity.Ass;
 import com.rui.ass.service.AssService;
+import com.rui.sys.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,5 +40,12 @@ public class AssController extends BaseController {
     @RequestMapping("/allList")
     public List<Ass> findAllList(){
         return service.findAllList();
+    }
+
+    @RequestMapping("/masterList")
+    public List<Ass> findListByMaster(){
+        Ass ass = new Ass();
+        ass.setMaster((User) SecurityUtils.getSubject().getPrincipal());
+        return service.findListByMaster(ass);
     }
 }

@@ -36,6 +36,17 @@
 		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
 	</select>
 
+    <select id="findListByMaster" resultType="Ass">
+        SELECT
+        <include refid="assColumns"/>
+        FROM ass a
+		<include refid="assJoins"/>
+		<if test="master != null and master.id != null and master.id != '1'.toString()">
+			WHERE a.master = #{ master.id }
+		</if>
+		ORDER BY a.name
+	</select>
+
 	<select id="count"  resultType="java.lang.Integer">
         SELECT count(*) FROM ass
     </select>

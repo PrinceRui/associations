@@ -45,7 +45,10 @@ public class UserController extends BaseController {
 
     @RequestMapping("/list")
     public Page<User> findList(@RequestBody User user){
-        return service.findPageList(user);
+        Page<User> page = service.findPageList(user);
+        /* 排除管理员 */
+        page.setCount(page.getCount() - 1);
+        return page;
     }
 
     @RequestMapping("/save")

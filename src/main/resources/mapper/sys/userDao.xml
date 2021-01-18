@@ -42,7 +42,7 @@
         <include refid="userColumns"/>
         FROM user a
         <include refid="userJoins"/>
-        WHERE 1 = 1
+        WHERE a.id != '1'
 		<if test="num != null and num != ''">
 			AND a.num = #{num}
 		</if>
@@ -62,6 +62,7 @@
         <include refid="userColumns"/>
         FROM user a
         <include refid="userJoins"/>
+		WHERE a.id != '1'
         ORDER BY a.num
     </select>
 

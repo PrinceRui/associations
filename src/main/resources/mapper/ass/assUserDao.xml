@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.ass.dao.AssUserDao">
+
+    <sql id="assUserColumns">
+		a.ass_id as "ass.id",
+		ass.name as "ass.name",
+		a.user_id as "user.id",
+		u.name as "user.name",
+		u.num as "user.num",
+		u.email as "user.email",
+		u.phone as "user.phone",
+		u.photo as "user.photo",
+		u.office_id AS "user.office.id",
+		o.name AS "user.office.name",
+		a.status,
+		a.remark,
+		a.info
+	</sql>
+
+	<sql id="assUserJoins">
+		LEFT JOIN ass ass ON ass.id = a.ass_id
+		LEFT JOIN user u ON u.id = a.user_id
+		LEFT JOIN office o ON o.id = u.office_id
+    </sql>
+
+    <select id="findList" resultType="AssUser">
+        SELECT
+        <include refid="assUserColumns"/>
+        FROM ass_user a
+		<include refid="assUserJoins"/>
+		<if test="ass != null and ass.id != null and ass.id != ''">
+			WHERE a.ass_id = #{ass.id}
+			AND a.status != '2'
+		</if>
+		ORDER BY a.status, u.num
+		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+	</select>
+
+	<select id="countByAss"  resultType="java.lang.Integer">
+        SELECT count(*) FROM ass_user WHERE ass_id = #{ass.id}
+    </select>
+
+	<select id="count"  resultType="java.lang.Integer">
+        SELECT count(*) FROM ass_user
+    </select>
+
+    <select id="findAllList" resultType="AssUser">
+        SELECT
+        <include refid="assUserColumns"/>
+        FROM ass_user a
+		<include refid="assUserJoins"/>
+    </select>
+
+    <insert id="insert">
+		INSERT INTO ass_user(
+			ass_id,
+            user_id,
+		    status,
+		    remark,
+		    info
+		) VALUES (
+			#{ass.id},
+			#{user.id},
+			#{status},
+			#{remark},
+			#{info}
+		)
+	</insert>
+
+
+	<update id="update">
+		UPDATE ass_user SET
+			status = #{status},
+			remark = #{remark},
+			info = #{info}
+		WHERE user_id = #{user.id} and ass_id = #{ass.id}
+	</update>
+
+    <update id="delete">
+        DELETE FROM ass_user
+        WHERE user_id = #{user.id} and ass_id = #{ass.id}
+    </update>
+</mapper>
