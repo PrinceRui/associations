@@ -9,6 +9,7 @@
 		a.name,
 		a.master AS "master.id",
 		a.photo,
+		a.summary,
 		u.name As "master.name"
 	</sql>
 
@@ -62,11 +63,13 @@
 		INSERT INTO ass(
 			id,
             name,
+            summary,
 		    master,
 		    photo
 		) VALUES (
 			#{id},
 			#{name},
+			#{summary},
 			#{master.id},
 			#{photo}
 		)
@@ -76,6 +79,19 @@
 		UPDATE ass SET
 			name = #{name},
 			master = #{master.id},
+			summary = #{summary},
+			photo = #{photo}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateSummary">
+		UPDATE ass SET
+			summary = #{summary}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateLogo">
+		UPDATE ass SET
 			photo = #{photo}
 		WHERE id = #{id}
 	</update>

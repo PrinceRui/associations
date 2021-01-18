@@ -12,4 +12,6 @@ import java.util.List;
 @MyBatisDao
 public interface AssDao extends BaseDao<Ass> {
     List<Ass> findListByMaster(Ass ass);
+    int updateLogo(Ass ass);
+    int updateSummary(Ass ass);
 }

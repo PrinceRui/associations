@@ -18,4 +18,14 @@ public class AssService extends BaseService<AssDao, Ass> {
     public List<Ass> findListByMaster(Ass ass){
         return dao.findListByMaster(ass);
     }
+
+    @Transactional(readOnly = false)
+    public void updateLogo(Ass ass){
+        dao.updateLogo(ass);
+    }
+
+    @Transactional(readOnly = false)
+    public void updateSummary(Ass ass){
+        dao.updateSummary(ass);
+    }
 }

@@ -1,5 +1,6 @@
 package com.rui.framework.result;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.result.Result;
 import org.slf4j.Logger;
@@ -41,6 +42,7 @@ public class ResponseResultHandler implements ResponseBodyAdvice {
         if(o instanceof Result){
             return o;
         }
+        logger.info(JSONObject.toJSONString(Result.success(o)));
         return Result.success(o);
     }
 }

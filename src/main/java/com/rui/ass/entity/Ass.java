@@ -10,6 +10,7 @@ public class Ass extends BaseEntity<Ass> {
     private String name;
     private User master;
     private String photo;
+    private String summary;
 
     public Ass() {
         super();
@@ -41,5 +42,13 @@ public class Ass extends BaseEntity<Ass> {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

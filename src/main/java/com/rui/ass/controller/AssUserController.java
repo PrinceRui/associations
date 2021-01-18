@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,15 @@ public class AssUserController extends BaseController {
     private AssUserService service;
 
     @RequestMapping("/list")
-    public Page<AssUser> findList(@RequestBody AssUser assUser){
-        return service.findPageList(assUser);
+    public Page<AssUser> findList(@RequestBody AssUser assUser, HttpServletRequest request){
+        String path = request.getContextPath();
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+        Page<AssUser> page = service.findPageList(assUser);
+        List<AssUser> list =  page.getList();
+        for (AssUser user : list) {
+            user.getUser().setPhoto(basePath + (user.getUser().getPhoto() == null || user.getUser().getPhoto().equals("") ? "upload/head.png" : user.getUser().getPhoto()));
+        }
+        return page;
     }
 
     @RequestMapping("/agree")
