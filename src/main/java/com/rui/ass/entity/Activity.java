@@ -1,7 +1,10 @@
 package com.rui.ass.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rui.framework.entity.BaseEntity;
 import com.rui.sys.entity.User;
+
+import java.util.Date;
 
 /**
  * 活动管理
@@ -10,8 +13,8 @@ public class Activity extends BaseEntity<Activity> {
     private String name;
     private Ass ass;
     private String content;
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private String status;
 
 
@@ -47,19 +50,21 @@ public class Activity extends BaseEntity<Activity> {
         this.content = content;
     }
 
-    public String getStartTime() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

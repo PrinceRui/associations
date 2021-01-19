@@ -32,10 +32,14 @@
         <include refid="activityColumns"/>
         FROM activity a
 		<include refid="activityJoins"/>
+		WHERE 1 = 1
 		<if test="name != null and name != ''">
-			WHERE a.name like CONCAT('%', #{name}, '%')
+			AND a.name like CONCAT('%', #{name}, '%')
 		</if>
-		ORDER BY a.name
+		<if test="ass != null and ass.id != null and ass.id != ''">
+			AND a.ass_id = #{ass.id}
+		</if>
+		ORDER BY a.status, a.start_time desc
 		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
 	</select>
 
@@ -48,6 +52,15 @@
         <include refid="activityColumns"/>
         FROM activity a
 		<include refid="activityJoins"/>
+    </select>
+
+    <select id="checkList" resultType="Activity">
+        SELECT
+        <include refid="activityColumns"/>
+        FROM activity a
+		<include refid="activityJoins"/>
+		WHERE a.status = '2'
+		ORDER BY a.end_time
     </select>
 
     <insert id="insert">
