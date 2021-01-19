@@ -12,6 +12,10 @@ public class Utils {
         return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
     }
 
+    public static void main(String[] args) {
+        System.out.println(entryptPassword("123456"));
+    }
+
     /**
      * 验证密码
      * @param plainPassword 明文密码

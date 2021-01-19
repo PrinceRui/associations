@@ -10,7 +10,6 @@
 		a.ass_id AS "ass.id",
 		a.content,
 		a.start_time,
-		a.end_time,
 		a.status,
 		ass.name As "ass.name"
 	</sql>
@@ -60,7 +59,6 @@
         FROM activity a
 		<include refid="activityJoins"/>
 		WHERE a.status = '2'
-		ORDER BY a.end_time
     </select>
 
     <insert id="insert">
@@ -70,16 +68,14 @@
 		    ass_id,
 		    content,
 		    start_time,
-		    status,
-		    end_time
+		    status
 		) VALUES (
 			#{id},
 			#{name},
 			#{ass.id},
 			#{content},
 			#{startTime},
-			#{status},
-			#{endTime}
+			#{status}
 		)
 	</insert>
 
@@ -89,7 +85,6 @@
 			ass_id = #{ass.id},
 			content = #{content},
 			start_time = #{startTime},
-			end_time = #{endTime},
 			status = #{status}
 		WHERE id = #{id}
 	</update>

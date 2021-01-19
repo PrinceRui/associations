@@ -14,7 +14,6 @@ public class Activity extends BaseEntity<Activity> {
     private Ass ass;
     private String content;
     private Date startTime;
-    private Date endTime;
     private String status;
 
 
@@ -57,15 +56,6 @@ public class Activity extends BaseEntity<Activity> {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
-    }
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
     public String getStatus() {
