@@ -3,6 +3,9 @@ package com.rui.sys.service;
 import com.rui.framework.service.BaseService;
 import com.rui.sys.dao.MenuDao;
 import com.rui.sys.entity.Menu;
+import com.rui.sys.entity.User;
+import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +29,17 @@ public class MenuService extends BaseService<MenuDao, Menu> {
 
     public List<Menu> findTreeList(Menu menu){
         return listToTree(findList(menu));
+    }
+
+    public List<Menu> findByUserId(){
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        List<Menu> list = new ArrayList<>();
+        if (user.isAdmin()){
+            list = dao.findAllList();
+        }else{
+            list = dao.findByUserId(user.getId());
+        }
+        return listToTree(list);
     }
 
     public List<Menu> findAllTreeList(){
