@@ -3,6 +3,7 @@ package com.rui.framework.utils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import javax.sound.midi.Soundbank;
 import java.security.SecureRandom;
 import java.util.UUID;
 
@@ -30,6 +31,12 @@ public class IdGen {
      */
     public static long randomLong() {
         return Math.abs(random.nextLong());
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 740; i++) {
+            System.out.println(uuid());
+        }
     }
 
 }
