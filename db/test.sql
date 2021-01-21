@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2021-01-21 11:01:16
+Date: 2021-01-21 11:04:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -220,7 +220,9 @@ CREATE TABLE `role` (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
+INSERT INTO `role` VALUES ('00c3a07dc10f416c80bf3cee8eb11ca8', '社团主席');
 INSERT INTO `role` VALUES ('1', '普通用户');
+INSERT INTO `role` VALUES ('c6514225e1be45cfa13b77a87c2ec5b7', '管理员');
 
 -- ----------------------------
 -- Table structure for role_menu
@@ -235,6 +237,13 @@ CREATE TABLE `role_menu` (
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
+INSERT INTO `role_menu` VALUES ('00c3a07dc10f416c80bf3cee8eb11ca8', '21');
+INSERT INTO `role_menu` VALUES ('00c3a07dc10f416c80bf3cee8eb11ca8', '22');
+INSERT INTO `role_menu` VALUES ('00c3a07dc10f416c80bf3cee8eb11ca8', '31');
+INSERT INTO `role_menu` VALUES ('c6514225e1be45cfa13b77a87c2ec5b7', '11');
+INSERT INTO `role_menu` VALUES ('c6514225e1be45cfa13b77a87c2ec5b7', '12');
+INSERT INTO `role_menu` VALUES ('c6514225e1be45cfa13b77a87c2ec5b7', '23');
+INSERT INTO `role_menu` VALUES ('c6514225e1be45cfa13b77a87c2ec5b7', '32');
 
 -- ----------------------------
 -- Table structure for role_user
