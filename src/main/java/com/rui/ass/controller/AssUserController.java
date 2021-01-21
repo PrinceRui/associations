@@ -37,16 +37,10 @@ public class AssUserController extends BaseController {
         return page;
     }
 
-    @RequestMapping("/agree")
-    public void agree(@RequestBody AssUser assUser){
-        assUser.setStatus("1");
-        service.update(assUser);
-    }
-
-    @RequestMapping("/refuse")
-    public void refuse(@RequestBody AssUser assUser){
-        assUser.setStatus("2");
-        service.update(assUser);
+    @RequestMapping("/save")
+    public void save(@RequestBody AssUser assUser){
+        service.delete(assUser);
+        service.save(assUser);
     }
 
     @RequestMapping("/delete")

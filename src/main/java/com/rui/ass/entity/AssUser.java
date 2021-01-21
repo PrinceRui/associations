@@ -9,9 +9,11 @@ import com.rui.sys.entity.User;
 public class AssUser extends BaseEntity<AssUser> {
     private Ass ass;
     private User user;
-    private String status;
-    private String info;
-    private String remark;
+
+    public AssUser(Ass ass, User user) {
+        this.ass = ass;
+        this.user = user;
+    }
 
     public AssUser() {
         super();
@@ -37,27 +39,4 @@ public class AssUser extends BaseEntity<AssUser> {
         this.user = user;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 }

@@ -1,6 +1,8 @@
 package com.rui.ass.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.rui.ass.entity.AssUser;
+import com.rui.ass.service.AssUserService;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
 import com.rui.framework.entity.Page;
@@ -26,6 +28,8 @@ import java.util.List;
 public class AssController extends BaseController {
     @Autowired
     private AssService service;
+    @Autowired
+    private AssUserService assUserService;
 
     @RequestMapping("/get")
     public Ass get(@RequestParam(required=false) String id, HttpServletRequest request){
@@ -55,6 +59,7 @@ public class AssController extends BaseController {
 
     @RequestMapping(value = "save")
     public void save(@RequestBody Ass ass) {
+        assUserService.save(new AssUser(ass, ass.getMaster()));
         service.save(ass);
     }
 

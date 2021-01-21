@@ -14,10 +14,7 @@
 		u.phone as "user.phone",
 		u.photo as "user.photo",
 		u.office_id AS "user.office.id",
-		o.name AS "user.office.name",
-		a.status,
-		a.remark,
-		a.info
+		o.name AS "user.office.name"
 	</sql>
 
 	<sql id="assUserJoins">
@@ -33,9 +30,8 @@
 		<include refid="assUserJoins"/>
 		<if test="ass != null and ass.id != null and ass.id != ''">
 			WHERE a.ass_id = #{ass.id}
-			AND a.status != '2'
 		</if>
-		ORDER BY a.status, u.num
+		ORDER BY u.num
 		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
 	</select>
 
@@ -47,7 +43,6 @@
         SELECT count(*) FROM ass_user a
 		<if test="ass != null and ass.id != null and ass.id != ''">
 			WHERE a.ass_id = #{ass.id}
-			AND a.status != '2'
 		</if>
     </select>
 
@@ -61,27 +56,12 @@
     <insert id="insert">
 		INSERT INTO ass_user(
 			ass_id,
-            user_id,
-		    status,
-		    remark,
-		    info
+            user_id
 		) VALUES (
 			#{ass.id},
-			#{user.id},
-			#{status},
-			#{remark},
-			#{info}
+			#{user.id}
 		)
 	</insert>
-
-
-	<update id="update">
-		UPDATE ass_user SET
-			status = #{status},
-			remark = #{remark},
-			info = #{info}
-		WHERE user_id = #{user.id} and ass_id = #{ass.id}
-	</update>
 
     <update id="delete">
         DELETE FROM ass_user
