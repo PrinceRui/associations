@@ -17,5 +17,12 @@ public class ActivityService extends BaseService<ActivityDao, Activity> {
     public List<Activity> checkList(){
         return dao.checkList();
     }
+    public Integer countWxList(){
+        return dao.countWxList();
+    }
+
+    public List<Activity> activityList(Integer index){
+        return dao.activityList(index);
+    }
 
 }

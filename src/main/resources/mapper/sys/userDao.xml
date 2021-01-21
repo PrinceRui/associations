@@ -14,6 +14,7 @@
 		a.phone,
 		a.user_type,
 		a.photo,
+		a.wid,
 		o.name AS "office.name"
 	</sql>
 
@@ -35,6 +36,14 @@
         FROM user a
         <include refid="userJoins"/>
         WHERE a.num = #{num}
+    </select>
+
+    <select id="getUserByWid" resultType="User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM user a
+        <include refid="userJoins"/>
+        WHERE a.wid = #{wid}
     </select>
 
     <select id="findList" resultType="User">
@@ -76,6 +85,7 @@
 			email,
 			phone,
 			user_type,
+			wid,
 			photo
 		) VALUES (
 			#{id},
@@ -86,6 +96,7 @@
 			#{email},
 			#{phone},
 			#{userType},
+			#{wid},
 			#{photo}
 		)
 	</insert>
@@ -99,6 +110,7 @@
 			email = #{email},
 			phone = #{phone},
 			user_type = #{userType},
+			wid = #{wid},
 			photo = #{photo}
 		WHERE id = #{id}
 	</update>
@@ -119,6 +131,12 @@
     <update id="updatePwd">
 		UPDATE user SET
 			password = #{password}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateWid">
+		UPDATE user SET
+			wid = #{wid}
 		WHERE id = #{id}
 	</update>
 

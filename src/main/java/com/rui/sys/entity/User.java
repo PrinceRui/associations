@@ -40,6 +40,10 @@ public class User extends BaseEntity<User> {
      * 用户类型（1:老师，2:学生）
      */
     private String userType;
+    /**
+     * 微信用户唯一标识
+     */
+    private String wid;
 
 
     public User() {
@@ -124,4 +128,11 @@ public class User extends BaseEntity<User> {
         return id != null && "1".equals(id);
     }
 
+    public String getWid() {
+        return wid;
+    }
+
+    public void setWid(String wid) {
+        this.wid = wid;
+    }
 }

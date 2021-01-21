@@ -42,6 +42,21 @@
 		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
 	</select>
 
+    <select id="activityList" resultType="Activity">
+        SELECT
+        <include refid="activityColumns"/>
+        FROM activity a
+		<include refid="activityJoins"/>
+		WHERE a.status = '3'
+		ORDER BY a.start_time desc
+		LIMIT ${(index - 1) * 30}, 30
+	</select>
+
+	<select id="countWxList"  resultType="java.lang.Integer">
+        SELECT count(*) FROM activity
+		WHERE status = '3'
+	</select>
+
 	<select id="count"  resultType="java.lang.Integer">
         SELECT count(*) FROM activity
     </select>

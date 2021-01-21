@@ -39,6 +39,14 @@ public class UserService extends BaseService<UserDao, User> {
         dao.updateInfo(user);
     }
 
+    public void updateWid(User user){
+        dao.updateWid(user);
+    }
+
+    public User getUserByWid(String wid){
+        return dao.getUserByWid(wid);
+    }
+
     public void updateImg(User user){
         dao.updateImg(user);
     }
