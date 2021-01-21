@@ -165,10 +165,6 @@ CREATE TABLE `dict` (
 -- Records of dict
 -- ----------------------------
 INSERT INTO `dict` VALUES ('1', '0', '否', 'yes_no', '是否', '10');
-INSERT INTO `dict` VALUES ('10', '0', '待通过', 'ass_user_status', '社团成员状态', '10');
-INSERT INTO `dict` VALUES ('11', '1', '已加入', 'ass_user_status', '社团成员状态', '20');
-INSERT INTO `dict` VALUES ('12', '2', '已拒绝', 'ass_user_status', '社团成员状态', '30');
-INSERT INTO `dict` VALUES ('13', '0', '已打回', 'activity_status', '活动申请状态', '40');
 INSERT INTO `dict` VALUES ('2', '1', '是', 'yes_no', '是否', '20');
 INSERT INTO `dict` VALUES ('3', '1', '老师', 'user_type', '用户类型', '20');
 INSERT INTO `dict` VALUES ('4', '2', '学生', 'user_type', '用户类型', '10');
