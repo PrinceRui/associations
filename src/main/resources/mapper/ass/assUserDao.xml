@@ -44,7 +44,11 @@
     </select>
 
 	<select id="count"  resultType="java.lang.Integer">
-        SELECT count(*) FROM ass_user
+        SELECT count(*) FROM ass_user a
+		<if test="ass != null and ass.id != null and ass.id != ''">
+			WHERE a.ass_id = #{ass.id}
+			AND a.status != '2'
+		</if>
     </select>
 
     <select id="findAllList" resultType="AssUser">

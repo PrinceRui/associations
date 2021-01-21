@@ -42,7 +42,10 @@
     </select>
 
     <select id="count"  resultType="java.lang.Integer">
-        SELECT count(*) FROM role
+        SELECT count(*) FROM role a
+        <if test="name != null and name != ''">
+            WHERE a.name like CONCAT('%', #{name}, '%')
+        </if>
     </select>
 
     <select id="getByUserId" resultType="Role">

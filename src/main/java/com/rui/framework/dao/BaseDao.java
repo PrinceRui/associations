@@ -23,7 +23,7 @@ public interface BaseDao<T> {
     /**
      * 获取总数
      */
-    int count();
+    int count(T entity);
 
     /**
      * 查询数据列表

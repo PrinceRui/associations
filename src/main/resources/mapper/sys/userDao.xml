@@ -63,7 +63,14 @@
     </select>
 
 	<select id="count"  resultType="java.lang.Integer">
-        SELECT count(*) FROM user
+        SELECT count(*) FROM user a
+		WHERE a.id != '1'
+		<if test="num != null and num != ''">
+			AND a.num = #{num}
+		</if>
+		<if test="name != null and name != ''">
+			AND a.name like CONCAT('%', #{name}, '%')
+		</if>
     </select>
 
     <select id="findAllList" resultType="User">

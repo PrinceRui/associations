@@ -49,7 +49,7 @@ public class BaseService<Dao extends BaseDao<T>, T extends BaseEntity<T>> {
     public Page<T> findPageList(T entity) {
         Page<T> page = new Page<>(entity.getPage());
         page.setList(dao.findList(entity));
-        page.setCount(dao.count());
+        page.setCount(dao.count(entity));
         return page;
     }
 
