@@ -1,13 +1,20 @@
 package com.rui.wx.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rui.ass.entity.Activity;
+import com.rui.ass.entity.Ass;
+import com.rui.ass.entity.AssUser;
 import com.rui.ass.service.ActivityService;
+import com.rui.ass.service.AssService;
+import com.rui.ass.service.AssUserService;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
 import com.rui.framework.utils.HttpUtil;
 import com.rui.sys.entity.User;
 import com.rui.sys.service.UserService;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +35,12 @@ public class WxController extends BaseController {
 
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private AssService assService;
+
+    @Autowired
+    private AssUserService assUserService;
 
     @RequestMapping("/login")
     public JSONObject test(@RequestBody JSONObject json){
@@ -64,6 +77,28 @@ public class WxController extends BaseController {
     @RequestMapping("/getActivity")
     public Activity getActivity(@RequestBody JSONObject json){
         return activityService.get(json.get("id").toString());
+    }
+
+    @RequestMapping("/getAss")
+    public Ass getAss(@RequestBody JSONObject json){
+        Ass ass = assService.get(json.get("id").toString());
+        String summary = ass.getSummary();
+        //summary = summary.replace("\t", "\\xa0\\xa0\\xa0\\xa0");
+        //summary = summary.replace("\t","@@#!");
+        //summary = summary.replace(" ","#!@@");
+        System.out.println(summary);
+        ass.setSummary(summary);
+        return ass;
+    }
+
+    @RequestMapping("/getAllAss")
+    public List<Ass> getAllAss(@RequestBody JSONObject json){
+        return assService.findAllList();
+    }
+
+    @RequestMapping("/getMyAss")
+    public List<AssUser> getMyAss(@RequestBody JSONObject json){
+        return assUserService.findListByUser(json.get("id").toString());
     }
 
 

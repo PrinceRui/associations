@@ -7,6 +7,8 @@ import com.rui.ass.entity.AssUser;
 import com.rui.framework.entity.Page;
 import com.rui.framework.service.BaseService;
 import com.rui.sys.entity.User;
+import org.apache.commons.dbcp.datasources.PerUserPoolDataSource;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,5 +29,9 @@ public class AssUserService extends BaseService<AssUserDao, AssUser> {
     @Transactional(readOnly = false)
     public void update(AssUser entity){
         dao.update(entity);
+    }
+
+    public List<AssUser> findListByUser(String userId){
+        return dao.findListByUser(userId);
     }
 }

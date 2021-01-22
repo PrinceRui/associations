@@ -35,6 +35,14 @@
 		LIMIT ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
 	</select>
 
+    <select id="findListByUser" resultType="AssUser">
+        SELECT
+        <include refid="assUserColumns"/>
+        FROM ass_user a
+		<include refid="assUserJoins"/>
+		WHERE a.user_id = #{userId}
+	</select>
+
 	<select id="countByAss"  resultType="java.lang.Integer">
         SELECT count(*) FROM ass_user WHERE ass_id = #{ass.id}
     </select>
