@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2021-01-22 17:39:03
+Date: 2021-01-25 10:27:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1394,7 +1394,7 @@ INSERT INTO `user` VALUES ('0ecede99042846168ab380093de994ed', '1e2b0fc6e1d1458d
 INSERT INTO `user` VALUES ('0ee34fc904f74889a0e5ecfdf37af910', 'e17a503848494148b18c8b9acd4fdb95', '20210468', '合忆柏', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
 INSERT INTO `user` VALUES ('0fd4ccd55c214ba2af5f956ac8597806', '67de704b859a4a82910bd279a46870e9', '20210243', '德双', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
 INSERT INTO `user` VALUES ('0ff5f407a19340a6a9a1607547487bf8', '6fa4a475d7ba4ed1b195e1152269c747', '20210264', '年飞鹏', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
-INSERT INTO `user` VALUES ('1', '', 'admin', '管理员', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '', null, 'oKOu94jTBu1e3PKx5m94a9C4TM0M');
+INSERT INTO `user` VALUES ('1', '', 'admin', '管理员', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '', null, null);
 INSERT INTO `user` VALUES ('1011a873d7704c7781de05f90190847b', 'eb4671a546a347d2923656acd468ec9d', '20210608', '金代容', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
 INSERT INTO `user` VALUES ('11579b91a40647ac9760a6255ddba0c9', '623e7baf0ab64ccab60fb8023f2db7aa', '20210227', '郜婉', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
 INSERT INTO `user` VALUES ('11a353d475cc4790a0d31b8c1b9fffbc', 'eee038f913da4e8bbb19dc12f1fe8a27', '20210631', '穰高峯', 'e5e3ce5078f04d2af0f5a8d6b23c6cfb897e85116374719ab136dc51', null, null, '2', null, null);
