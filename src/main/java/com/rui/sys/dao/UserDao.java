@@ -11,6 +11,7 @@ public interface UserDao extends BaseDao<User> {
     User getUserByNum(@Param("num")String num);
     User getUserByWid(@Param("wid")String wid);
     int updateInfo(User user);
+    int delWidByid(@Param("id")String id);
     int updatePwd(User user);
     int updateImg(User user);
     int updateWid(User user);

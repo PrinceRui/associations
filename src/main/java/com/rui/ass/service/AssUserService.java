@@ -34,4 +34,7 @@ public class AssUserService extends BaseService<AssUserDao, AssUser> {
     public List<AssUser> findListByUser(String userId){
         return dao.findListByUser(userId);
     }
+    public List<AssUser> findListByAss(String assId){
+        return dao.findListByAss(assId);
+    }
 }

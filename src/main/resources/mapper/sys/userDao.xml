@@ -147,6 +147,12 @@
 		WHERE id = #{id}
 	</update>
 
+    <update id="delWidByid">
+		UPDATE user SET
+			wid = null
+		WHERE id = #{id}
+	</update>
+
     <update id="resetPassword">
 		UPDATE user SET
 			password = #{password}

@@ -13,4 +13,5 @@ import java.util.List;
 public interface AssUserDao extends BaseDao<AssUser> {
     int countByAss(AssUser entity);
     List<AssUser> findListByUser(@Param("userId") String userId);
+    List<AssUser> findListByAss(@Param("assId") String assId);
 }

@@ -11,6 +11,7 @@ import com.rui.ass.service.AssUserService;
 import com.rui.framework.annotation.ResponseResult;
 import com.rui.framework.controller.BaseController;
 import com.rui.framework.utils.HttpUtil;
+import com.rui.framework.utils.Utils;
 import com.rui.sys.entity.User;
 import com.rui.sys.service.UserService;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
@@ -64,6 +65,37 @@ public class WxController extends BaseController {
         return result;
     }
 
+    @RequestMapping("/bind")
+    public JSONObject bind(@RequestBody JSONObject json){
+        String username = json.get("username").toString();
+        String password = json.get("password").toString();
+        String openid = json.get("openid").toString();
+        JSONObject result = new JSONObject();
+        result.put("openid", openid);
+        User user = userService.getUserByNum(username);
+        if(user == null){
+            result.put("errInfo", "账号不存在");
+            return result;
+        }
+        if(!Utils.validatePassword(password, user.getPassword())){
+            result.put("errInfo", "密码错误");
+            return result;
+        }
+        if(user.getWid() != null && !user.getWid().equals("")){
+            result.put("errInfo", "该账号已被绑定");
+            return result;
+        }
+        user.setWid(openid);
+        userService.updateWid(user);
+        result.put("user", user);
+        return result;
+    }
+
+    @RequestMapping("/logout")
+    public void logout(@RequestBody JSONObject json){
+        userService.delWidByid(json.get("id").toString());
+    }
+
     @RequestMapping("/activityList")
     public JSONObject activityList(@RequestBody JSONObject json){
         JSONObject result = new JSONObject();
@@ -99,6 +131,11 @@ public class WxController extends BaseController {
     @RequestMapping("/getMyAss")
     public List<AssUser> getMyAss(@RequestBody JSONObject json){
         return assUserService.findListByUser(json.get("id").toString());
+    }
+
+    @RequestMapping("/getAssUser")
+    public List<AssUser> getAssUser(@RequestBody JSONObject json){
+        return assUserService.findListByAss(json.get("id").toString());
     }
 
 
